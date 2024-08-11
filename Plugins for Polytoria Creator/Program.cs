@@ -10,7 +10,7 @@ namespace Plugins_for_Polytoria_Creator {
         /// The target version specifies the minimum version and the version
         /// PfPC should be used on.
         /// </summary>
-        public const long TargetVersion = 103037; // 1.3.37
+        public const long TargetVersion = 1040106; // 1.4.106
 
         public static string CreatorVersion { get; private set; } = "Unknown!";
         public static long CreatorVersionNumeric { get; private set; } = -1;
@@ -22,7 +22,7 @@ namespace Plugins_for_Polytoria_Creator {
         public static string LocalModsPath { get; private set; } = Path.Join(AppPath, "installed");
 
 
-        public static bool LoaderInstalled => File.Exists(Path.Join(InstalledCreatorPath, "version.dll"));
+        public static bool LoaderInstalled => File.Exists(Path.Join(InstalledCreatorPath, "winhttp.dll"));
 
         /// <summary>
         ///  The main entry point for the application.

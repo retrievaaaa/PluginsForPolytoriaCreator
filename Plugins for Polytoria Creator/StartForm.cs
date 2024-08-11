@@ -6,11 +6,13 @@ using System.IO.Compression;
 using System.Net;
 
 namespace Plugins_for_Polytoria_Creator {
-    public partial class StartForm : Form {
+    public partial class StartForm : Form
+    {
         public static StartForm Instance { get; private set; }
         private BindingList<ModMeta> mods = new();
 
-        public StartForm() {
+        public StartForm()
+        {
             InitializeComponent();
             ListBoxMods.DataSource = mods;
             Instance = this;
@@ -18,26 +20,31 @@ namespace Plugins_for_Polytoria_Creator {
             LoadInstalledMods();
         }
 
-        private void LoadInstalledMods() {
+        private void LoadInstalledMods()
+        {
             mods.Clear();
             ListBoxMods.ClearSelected();
 
             string[] modDirectories = Directory.GetDirectories(Program.LocalModsPath);
 
-            foreach (var modDirectory in modDirectories) {
+            foreach (var modDirectory in modDirectories)
+            {
                 var metaPath = Path.Join(modDirectory, "meta.json");
 
-                if (!File.Exists(metaPath)) {
+                if (!File.Exists(metaPath))
+                {
                     continue; // Probably a corrupted mod
                 }
 
                 ModMeta? meta = JsonConvert.DeserializeObject<ModMeta>(
                         File.ReadAllText(metaPath),
-                        new JsonSerializerSettings() {
+                        new JsonSerializerSettings()
+                        {
                             MissingMemberHandling = MissingMemberHandling.Ignore,
                         });
 
-                if (meta == null) {
+                if (meta == null)
+                {
                     continue;
                 }
 
@@ -47,10 +54,12 @@ namespace Plugins_for_Polytoria_Creator {
             UpdateSelectedUI();
         }
 
-        private void UpdateSelectedUI() {
+        private void UpdateSelectedUI()
+        {
             ModMeta? selectedMod = ListBoxMods.SelectedItem as ModMeta;
 
-            if (selectedMod == null) {
+            if (selectedMod == null)
+            {
                 return;
             }
 
@@ -59,14 +68,17 @@ namespace Plugins_for_Polytoria_Creator {
             LabelMaxVersion.Text = $"Maximum Creator Version: {selectedMod.MaxCreatorVersion}";
         }
 
-        private void StartForm_Load(object sender, EventArgs e) {
+        private void StartForm_Load(object sender, EventArgs e)
+        {
             LabelPolytoriaCreator.Text = $"Polytoria Creator Version: {Program.CreatorVersionNumeric} ({Program.CreatorVersion}); Loader Installed: {Program.LoaderInstalled}";
 
             UpdateInstallerButton();
         }
 
-        private async void ButtonInstallLoader_Click(object sender, EventArgs e) {
-            if (Program.LoaderInstalled) {
+        private async void ButtonInstallLoader_Click(object sender, EventArgs e)
+        {
+            if (Program.LoaderInstalled)
+            {
                 ErrorUtils.ShowError("PfPC is already installed for that version!");
                 return;
             }
@@ -84,27 +96,33 @@ namespace Plugins_for_Polytoria_Creator {
             LabelState.Text = "Synced mods!";
         }
 
-        private async Task<bool> DownloadMelonLoader() {
-            LabelState.Text = "Downloading MelonLoader... (0 mb / ? mb)";
+        private async Task<bool> DownloadMelonLoader()
+        {
+            LabelState.Text = "Downloading BepInEx... (0 mb / ? mb)";
             ProgessBarState.Value = 0;
 
             WebClient wc = new();
             wc.DownloadProgressChanged += MelonLoader_DownloadProgressChanged;
 
-            try {
+            try
+            {
                 await wc.DownloadFileTaskAsync(
-                    new Uri("https://github.com/LavaGang/MelonLoader/releases/latest/download/MelonLoader.x64.zip"),
+                    //new Uri("https://nightly.link/LavaGang/MelonLoader/workflows/build/alpha-development/MelonLoader.Windows.x64.CI.Release.zip"),
+                    new Uri("https://builds.bepinex.dev/projects/bepinex_be/692/BepInEx-Unity.IL2CPP-win-x64-6.0.0-be.692%2B851521c.zip"),
                     Path.Join(Program.AppPath, "MelonLoader.zip"));
-            } catch (Exception ex) {
-                ErrorUtils.ShowError($"Failed to download melonloader!\n" +
+            } catch (Exception ex)
+            {
+                ErrorUtils.ShowError($"Failed to download BepInEx!\n" +
                     $"Error: {ex.Message}");
             }
 
             return true;
         }
 
-        private async Task<bool> ExtractMelonLoader() {
-            try {
+        private async Task<bool> ExtractMelonLoader()
+        {
+            try
+            {
                 LabelState.Text = "Extracting files...";
                 ProgessBarState.Value = 0;
 
@@ -123,15 +141,18 @@ namespace Plugins_for_Polytoria_Creator {
                 ProgessBarState.Value = 100;
 
                 return true;
-            } catch (Exception ex) {
+            } catch (Exception ex)
+            {
                 ErrorUtils.ShowError($"Failed to extract melonloader!\n" +
                     $"Error: {ex.Message}");
                 return false;
             }
         }
 
-        private async Task<bool> CopyFiles() {
-            try {
+        private async Task<bool> CopyFiles()
+        {
+            try
+            {
                 LabelState.Text = "Installing loader...";
                 ProgessBarState.Value = 0;
 
@@ -168,39 +189,47 @@ namespace Plugins_for_Polytoria_Creator {
                 ProgessBarState.Value = 100;
 
                 return true;
-            } catch (Exception ex) {
+            } catch (Exception ex)
+            {
                 ErrorUtils.ShowError($"Failed to install loader!\n" +
                     $"Error: {ex.Message}");
                 return false;
             }
         }
 
-        private async Task<bool> SyncMods() {
-            try {
+        private async Task<bool> SyncMods()
+        {
+            try
+            {
                 if (mods.Count == 0) return true;
 
                 LabelState.Text = "Syncing mods...";
                 ProgessBarState.Value = 0;
                 ProgessBarState.Maximum = mods.Count;
 
-                foreach (var mod in mods) {
-                    try {
+                foreach (var mod in mods)
+                {
+                    try
+                    {
                         InstallModToCreator(Path.Join(Program.LocalModsPath, mod.ModFolderName));
-                    } catch (Exception ex) {
+                    } catch (Exception ex)
+                    {
                         ErrorUtils.ShowError($"Failed to synchronize mod '{mod.ModDisplayName}'!\n" +
                             $"Error: {ex.Message}");
                     }
                 }
 
                 return true;
-            } catch (Exception ex) {
+            } catch (Exception ex)
+            {
                 ErrorUtils.ShowError($"Failed to synchronize mods!\n" +
                     $"Error: {ex.Message}");
                 return false;
             }
         }
 
-        private void MelonLoader_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e) {
+        private void MelonLoader_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
             LabelState.Text = $"Downloading MelonLoader... (" +
                 $"{SizeUtils.GetSizeInMegabytes(e.BytesReceived):F2} mb / " +
                 $"{SizeUtils.GetSizeInMegabytes(e.TotalBytesToReceive):F2} mb" +
@@ -209,40 +238,74 @@ namespace Plugins_for_Polytoria_Creator {
             ProgessBarState.Value = e.ProgressPercentage;
         }
 
-        private void UpdateInstallerButton() {
-            if (Program.LoaderInstalled) {
+        private void UpdateInstallerButton()
+        {
+            if (Program.LoaderInstalled)
+            {
                 ButtonInstallLoader.Visible = false;
             }
         }
 
-        private void ButtonInstallFromGIT_Click(object sender, EventArgs e) {
+        private void ButtonInstallFromGIT_Click(object sender, EventArgs e)
+        {
             var dialog = new AddFromGITForm();
             dialog.ShowDialog();
         }
 
-        public void InstallFromGIT(string url) {
+        public void InstallFromGIT(string url)
+        {
 
         }
 
-        private void ButtonInstallFromZip_Click(object sender, EventArgs e) {
+        private void ButtonInstallFromZip_Click(object sender, EventArgs e)
+        {
             OpenFileDialogZipFile.ShowDialog();
         }
 
-        private void OpenFileDialogZipFile_FileOk(object sender, CancelEventArgs e) {
+        private void installFromFolder_Click(object sender, EventArgs e)
+        {
+            OpenFolderDialog.ShowDialog();
+
+            if (!Directory.Exists(OpenFolderDialog.SelectedPath))
+            {
+                ErrorUtils.ShowError("The specified folder was not found.");
+            }
+
+            try
+            {
+                var meta = InstallModToCreator(OpenFolderDialog.SelectedPath);
+
+                DirectoryUtils.CopyRecursive(OpenFolderDialog.SelectedPath,
+                    Path.Join(Program.LocalModsPath, meta.ModFolderName));
+
+                LoadInstalledMods();
+            } catch (Exception ex)
+            {
+                ErrorUtils.ShowError("Was not able to install mod.\n\n" +
+                    "Error:" + ex.Message);
+            }
+        }
+
+        private void OpenFileDialogZipFile_FileOk(object sender, CancelEventArgs e)
+        {
             // TODO: Add Status Strip Updates
-            if (!File.Exists(OpenFileDialogZipFile.FileName)) {
+            if (!File.Exists(OpenFileDialogZipFile.FileName))
+            {
                 ErrorUtils.ShowError("The specified file was not found.");
             }
 
-            try {
+            try
+            {
                 var extractPath = Path.Join(Program.AppPath, "tmpextract");
 
-                if (Directory.Exists(extractPath)) {
+                if (Directory.Exists(extractPath))
+                {
                     Directory.Delete(extractPath, true);
                 }
 
                 using (ZipArchive archive =
-                    new ZipArchive(File.OpenRead(OpenFileDialogZipFile.FileName), ZipArchiveMode.Read)) {
+                    new ZipArchive(File.OpenRead(OpenFileDialogZipFile.FileName), ZipArchiveMode.Read))
+                {
                     archive.ExtractToDirectory(extractPath);
 
                     var meta = InstallModToCreator(extractPath);
@@ -252,35 +315,42 @@ namespace Plugins_for_Polytoria_Creator {
 
                     LoadInstalledMods();
                 }
-            } catch (Exception ex) {
+            } catch (Exception ex)
+            {
                 ErrorUtils.ShowError("Was not able to install mod.\n\n" +
                     "Error:" + ex.Message);
             }
         }
 
-        private ModMeta InstallModToCreator(string path) {
-            if (!File.Exists(Path.Join(path, "meta.json"))) {
+        private ModMeta InstallModToCreator(string path)
+        {
+            if (!File.Exists(Path.Join(path, "meta.json")))
+            {
                 throw new InvalidDataException("Mod is missing a meta.json file in root.");
             }
 
             ModMeta meta = JsonConvert.DeserializeObject<ModMeta>(
                 File.ReadAllText(Path.Join(path, "meta.json")),
-                new JsonSerializerSettings() {
+                new JsonSerializerSettings()
+                {
                     MissingMemberHandling = MissingMemberHandling.Error,
                 })
                 ?? throw new InvalidDataException("Invalid meta.json");
 
-            if (!Directory.Exists(Path.Join(path, "files"))) {
+            if (!Directory.Exists(Path.Join(path, "files")))
+            {
                 throw new InvalidDataException("Mod is missing mod files.");
             }
 
             var creatorModTypePath = GetCreatorPathForModType(meta.ModType);
 
-            if (!Directory.Exists(creatorModTypePath)) {
+            if (!Directory.Exists(creatorModTypePath))
+            {
                 Directory.CreateDirectory(creatorModTypePath);
             }
 
-            if (!Directory.Exists(Path.Join(Program.LocalModsPath, meta.ModFolderName))) {
+            if (!Directory.Exists(Path.Join(Program.LocalModsPath, meta.ModFolderName)))
+            {
                 Directory.CreateDirectory(Path.Join(Program.LocalModsPath, meta.ModFolderName));
             }
 
@@ -289,46 +359,57 @@ namespace Plugins_for_Polytoria_Creator {
             return meta;
         }
 
-        private string GetCreatorPathForModType(ModType modType) {
+        private string GetCreatorPathForModType(ModType modType)
+        {
             var path = Program.InstalledCreatorPath;
 
-            if (modType == ModType.Mod) {
-                path = Path.Join(path, "Mods");
-            } else if (modType == ModType.UserLib) {
-                path = Path.Join(path, "UserLibs");
+            if (modType == ModType.Mod)
+            {
+                path = Path.Join(path, "BepInEx", "plugins");
+            } else if (modType == ModType.UserLib)
+            {
+                throw new Exception("Unsupported type: UserLib");
+                //path = Path.Join(path, "UserLibs");
             }
 
             return path;
         }
 
-        private void ButtonRemove_Click(object sender, EventArgs e) {
+        private void ButtonRemove_Click(object sender, EventArgs e)
+        {
             ModMeta? selectedMod = ListBoxMods.SelectedItem as ModMeta;
 
-            if (selectedMod == null) {
+            if (selectedMod == null)
+            {
                 return;
             }
 
             RemoveMod(selectedMod);
         }
 
-        private void RemoveMod(ModMeta meta) {
+        private void RemoveMod(ModMeta meta)
+        {
             var localModPath = Path.Join(Program.LocalModsPath, meta.ModFolderName);
 
             var creatorModBasePath = GetCreatorPathForModType(meta.ModType);
 
-            foreach (var modFile in Directory.GetFiles(Path.Join(localModPath, "files"))) {
+            foreach (var modFile in Directory.GetFiles(Path.Join(localModPath, "files")))
+            {
                 var creatorModFilePath = Path.Join(creatorModBasePath, Path.GetFileName(modFile));
 
-                if (File.Exists(creatorModFilePath)) {
+                if (File.Exists(creatorModFilePath))
+                {
                     File.Delete(creatorModFilePath);
                 }
             }
 
-            if (Directory.Exists(localModPath)) {
+            if (Directory.Exists(localModPath))
+            {
                 Directory.Delete(localModPath, true);
             }
 
             LoadInstalledMods();
         }
+
     }
 }

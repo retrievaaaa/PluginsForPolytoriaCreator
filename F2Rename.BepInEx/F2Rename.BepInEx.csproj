@@ -1,0 +1,329 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyName>F2Rename.BepInEx</AssemblyName>
+    <Product>f2rename for pauly</Product>
+    <Version>1.0.0</Version>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>latest</LangVersion>
+    <RestoreAdditionalProjectSources>
+      https://api.nuget.org/v3/index.json;
+      https://nuget.bepinex.dev/v3/index.json;
+      https://nuget.samboy.dev/v3/index.json
+    </RestoreAdditionalProjectSources>
+    <RootNamespace>F2Rename.BepInEx</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.*" IncludeAssets="compile" />
+    <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
+    <Reference Include="Battlehub.RTEditor">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\Battlehub.RTEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.Cryptography">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\BouncyCastle.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="glTFast">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\glTFast.dll</HintPath>
+    </Reference>
+    <Reference Include="HSVPicker">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\HSVPicker.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppMono.Security">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\Il2CppMono.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2Cppmscorlib">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\Il2Cppmscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\Il2CppSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.Configuration">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\Il2CppSystem.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.Core">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\Il2CppSystem.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.Net.Http">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\Il2CppSystem.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.Numerics">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\Il2CppSystem.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.Runtime.CompilerServices.Unsafe">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\Il2CppSystem.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.Xml">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\Il2CppSystem.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.Xml.Linq">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\Il2CppSystem.Xml.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="kcp2k">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\kcp2k.dll</HintPath>
+    </Reference>
+    <Reference Include="MiddlewareTransport">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\MiddlewareTransport.dll</HintPath>
+    </Reference>
+    <Reference Include="Mirror">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\Mirror.dll</HintPath>
+    </Reference>
+    <Reference Include="Mirror.Authenticators">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\Mirror.Authenticators.dll</HintPath>
+    </Reference>
+    <Reference Include="Mirror.Components">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\Mirror.Components.dll</HintPath>
+    </Reference>
+    <Reference Include="Mirror.Transports">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\Mirror.Transports.dll</HintPath>
+    </Reference>
+    <Reference Include="MultiplexTransport">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\MultiplexTransport.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleFileBrowser.Runtime">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\SimpleFileBrowser.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleWebTransport">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\SimpleWebTransport.dll</HintPath>
+    </Reference>
+    <Reference Include="SoftMask">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\SoftMask.dll</HintPath>
+    </Reference>
+    <Reference Include="Telepathy">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\Telepathy.dll</HintPath>
+    </Reference>
+    <Reference Include="U8XmlParser">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\U8XmlParser.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.AI.Navigation">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\Unity.AI.Navigation.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\Unity.Burst.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Unsafe">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\Unity.Burst.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Collections">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\Unity.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mathematics">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\Unity.Mathematics.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Postprocessing.Runtime">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\Unity.Postprocessing.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AccessibilityModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.AccessibilityModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AIModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.AIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AndroidJNIModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.AndroidJNIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.AnimationModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.AssetBundleModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.AudioModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ClothModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.ClothModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ClusterInputModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.ClusterInputModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ClusterRendererModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.ClusterRendererModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ContentLoadModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.ContentLoadModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CrashReportingModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.CrashReportingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.DirectorModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.DirectorModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.DSPGraphModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.DSPGraphModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.GameCenterModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.GameCenterModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.GIModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.GIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.GraphicsStateCollectionSerializerModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.GraphicsStateCollectionSerializerModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.GridModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.GridModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.HierarchyCoreModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.HierarchyCoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.HotReloadModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.HotReloadModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.ImageConversionModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.IMGUIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.InputForUIModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.InputForUIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.InputLegacyModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.InputModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.InputModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.JSONSerializeModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.JSONSerializeModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.LocalizationModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.LocalizationModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.MarshallingModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.MarshallingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.MultiplayerModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.MultiplayerModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.ParticleSystemModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.PerformanceReportingModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.PerformanceReportingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Physics2DModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.Physics2DModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.PhysicsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.PropertiesModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.PropertiesModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ScreenCaptureModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.ScreenCaptureModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ShaderVariantAnalyticsModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.ShaderVariantAnalyticsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SharedInternalsModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.SharedInternalsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteMaskModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.SpriteMaskModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteShapeModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.SpriteShapeModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.StreamingModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.StreamingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SubstanceModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.SubstanceModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SubsystemsModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.SubsystemsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.TerrainModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainPhysicsModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.TerrainPhysicsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextCoreFontEngineModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.TextCoreFontEngineModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextCoreTextEngineModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.TextCoreTextEngineModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.TextRenderingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIElementsModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.UIElementsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.UIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityAnalyticsCommonModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.UnityAnalyticsCommonModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityAnalyticsModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityConnectModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.UnityConnectModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityTestProtocolModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.UnityTestProtocolModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAudioModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.UnityWebRequestModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestTextureModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestWWWModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VehiclesModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.VehiclesModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VideoModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.VideoModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.WindModule">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\UnityEngine.WindModule.dll</HintPath>
+    </Reference>
+    <Reference Include="__Generated">
+      <HintPath>..\..\..\..\AppData\Roaming\Polytoria\Creator\1.4.106\BepInEx\interop\__Generated.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy &quot;$(OutDir)/$(TargetName).dll&quot; &quot;$(OutDir)/pack/files/$(TargetName).dll&quot; /y" />
+  </Target>
+</Project>
