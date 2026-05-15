@@ -1,3 +1,4 @@
+# doesnt work for 2.0 + 2.0 has addon support + u can contribute to 2.0
 # PluginsForPolytoriaCreator
 
 Making Polytoria Creator usable by providing support for mods/plugins! This tool utilizes [MelonLoader](https://github.com/LavaGang/MelonLoader/) - a Unity Mono & IL2Cpp mod loader. Since the process of installing it
